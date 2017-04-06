@@ -55,6 +55,6 @@ class MainPageTests(TestCase):
 
 			self.request.session = {}
 
-			expectedHtml = render_to_response('user.html', {'user': user_mock.get_by_id(1)}).content
+			expected_html = render_to_response('user.html', {'user': user_mock.get_by_id(1)}).content
 
-			self.assertEquals(resp.content, expected_html.content)
+			self.assertEquals(resp.content, expected_html)

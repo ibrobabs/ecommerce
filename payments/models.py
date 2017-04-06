@@ -29,12 +29,3 @@ def create(cls, name, email, password, last_4_digits, stripe_id):
 
 	new_user.save()
 	return new_user
-
-class UnpaidUsers(models.Model):
-    email = models.CharField(max_length=255, unique=True)
-    last_notification = models.DateTimeField(default=datetime.now())
-
-    def do_save(self, throw_error=None):
-        self.save()
-        if throw_error:
-            raise IntegrityError
