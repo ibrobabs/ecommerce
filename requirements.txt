@@ -2,6 +2,7 @@ Django==1.10.6
 mock==2.0.0
 pbr==2.0.0
 pkg-resources==0.0.0
+psycopg2==2.7.1
 requests==2.13.0
 six==1.10.0
 stripe==1.51.0
