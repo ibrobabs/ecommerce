@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'main',
     'contact',
     'payments',
+    'embed_video',
+    'rest_framework',
 ]
 
 SITE_ID = 1

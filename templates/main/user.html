@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+	<div class="row member-page">
+       <div class="col-sm-8">		
+            <div class="row">
+                {% include "main/statusupdate.html" %}
+                {% include "main/lateststatus.html" %}
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="row">
+                {% include "main/jedibadge.html" %}
+            </div>
+        </div>        
+    </div>
+{% endblock %}

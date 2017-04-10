@@ -1,17 +1,18 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve
-from .views import index
+from main.views import index, market_items
 from django.shortcuts import render, render_to_response
 from payments.models import User
-import mock
 from django.test import RequestFactory
+import mock
+
 
 class MainPageTests(TestCase):
 
 	# Set Up
 	@classmethod
 	def setUpClass(cls):
-		super(MainPageTests, cls).setUpClass()
+		super().setUpClass()
 		request_factory = RequestFactory()
 		cls.request = request_factory.get('/')
 		cls.request.session = {}
@@ -30,9 +31,9 @@ class MainPageTests(TestCase):
 
 	def test_returns_exact_html(self):
 		resp = index(self.request)
-		self.assertEquals(
+		self.assertEqual(
 			resp.content,
-			render(index, "index.html").content
+			render_to_response(index, "index.html").content
 		)
 
 	def test_index_handles_logged_in_user(self):
@@ -47,14 +48,13 @@ class MainPageTests(TestCase):
 
 		with mock.patch('main.views.User') as user_mock:
 
-			config = {'get.return_value': mock.Mock()}
-
+			config = {'get_by_id.return_value': mock.Mock()}
 			user_mock.configure_mock(**config)
 
 			resp = index(self.request)
 
 			self.request.session = {}
 
-			expected_html = render_to_response('user.html', {'user': user_mock.get_by_id(1)}).content
+			expected_html = render_to_response('main/user.html', {'user': user_mock.get_by_id(1)})
 
-			self.assertEquals(resp.content, expected_html)
+			self.assertEquals(resp.content, expected_html.content)
